@@ -1,0 +1,54 @@
+# --- tests -------------------------------------------------------------------
+tests/
+
+# --- experiment output -------------------------------------------------------
+# `log/` also holds the logger package itself, so ignore the run artefacts rather
+# than the directory.
+log/train_log/
+log/slurm/
+log/sweep/
+wandb/
+runs/
+outputs/
+*.csv
+*.out
+*.err
+
+# --- checkpoints -------------------------------------------------------------
+# Everything except the pre-trained aerodynamic network, which NeuralLander loads
+# at construction and cannot run without.
+*.pth
+*.pt
+*.ckpt
+!model/Fa_net_12_3_full_Lip16.pth
+
+# --- python ------------------------------------------------------------------
+__pycache__/
+*.py[cod]
+*$py.class
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+*.egg-info/
+build/
+dist/
+
+# --- environments ------------------------------------------------------------
+.venv/
+venv/
+env/
+.conda/
+.python-version
+
+# --- editors and OS ----------------------------------------------------------
+.vscode/
+.idea/
+*.swp
+.DS_Store
+Thumbs.db
+
+# --- scratch -----------------------------------------------------------------
+*.tmp
+*.bak
+scratch/
+notebooks/

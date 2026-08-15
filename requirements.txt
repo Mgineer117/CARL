@@ -1,0 +1,15 @@
+gymnasium
+matplotlib
+numpy
+pandas
+scipy
+tensorboard
+torch
+tqdm
+wandb
+
+# tests
+pytest
+
+# plotting/density_plot.py only
+seaborn
