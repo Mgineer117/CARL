@@ -210,9 +210,10 @@ def build_parser() -> argparse.ArgumentParser:
     p.add_argument(
         "--init-logstd",
         type=float,
-        default=0.0,
+        default=-2.0,
         help="Initial log std of the Gaussian actor.  Exploration must be on the scale of the "
-        "*correction* the controller needs, which is a fraction of the actuator range.",
+        "*correction* the controller needs, which is a fraction of the actuator range: -2 is "
+        "sigma = 0.14, ~5%% of the +/-3 control bound, where 0 put it at a third of the range.",
     )
     p.add_argument("--gamma", type=float, default=0.9, help="Discount factor.")
     p.add_argument("--gae", type=float, default=0.95, help="GAE trace decay.")

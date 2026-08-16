@@ -191,15 +191,16 @@ class GaussianHead(_StateAware):
     The scale is a state-independent learnable parameter, which keeps ``du/dx`` -- the gain matrix
     ``K`` that the contraction condition needs -- equal to the Jacobian of the mean.
 
-    ``init_logstd`` starts exploration well below the control bound.  The default of 0 (unit
-    standard deviation) is far too wide for a *correction* to a reference control: on these
-    benchmarks the useful corrections are a fraction of the actuator range, so unit noise simply
-    saturates the actuators and drowns the signal the advantage estimate is meant to carry.
+    ``init_logstd`` starts exploration well below the control bound.  Unit standard deviation --
+    what ``init_logstd = 0`` gives, and the previous default -- is far too wide for a *correction*
+    to a reference control: on these benchmarks the useful corrections are a fraction of the
+    actuator range, so unit noise simply saturates the actuators and drowns the signal the
+    advantage estimate is meant to carry.
     """
 
     LOGSTD_RANGE = (-5.0, 2.0)
 
-    def __init__(self, action_dim: int, init_logstd: float = -1.0):
+    def __init__(self, action_dim: int, init_logstd: float = -2.0):
         super().__init__()
         self.action_dim = action_dim
         self.logstd = nn.Parameter(torch.full((1, action_dim), float(init_logstd)))
@@ -275,7 +276,7 @@ class RecurrentActor(GaussianHead):
         ref_dim: int = 64,
         hidden_dim=(128,),
         angle_mask=None,
-        init_logstd: float = -1.0,
+        init_logstd: float = -2.0,
         x_min=None,
         x_max=None,
         pos_dimension: int = 0,
